@@ -1,20 +1,54 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<mat-toolbar>Halloween Contest</mat-toolbar>
+<div class="grid">
+	<mat-grid-list cols="8">
+		<mat-grid-tile colspan="2"rowspan='2'>
+			<mat-card class="card">
+				<mat-card-content>
+					<mat-list dense style="overflow-y: scroll; max-height: 20em;">
+						<mat-list-item *ngFor="let contestant of contestants">
+							<span>{{contestant.costume}}</span>
+							<button mat-button [matMenuTriggerFor]="menu">Vote</button>
+							<mat-menu #menu="matMenu">
+								<button *ngFor="let category of categories" mat-menu-item (click)="addVotes(contestant,category)">{{category}}</button>
+							</mat-menu>
+						</mat-list-item>
+					</mat-list>
+				</mat-card-content>
+			</mat-card>
+		</mat-grid-tile>
+		<mat-grid-tile colspan="6" >
+			<mat-card class="card" *ngFor="let category of categories" style="min-height: 10em;">
+				<mat-card-title>{{category}}</mat-card-title>
+				<mat-card-subtitle>
+					<ul dense *ngIf="results">
+						<li *ngFor="let contestant of winners[category]">
+							<span *ngIf="winners[category].length ===1">Winner </span>
+							<span *ngIf="winners[category].length >=2">Tied </span>
+							<span> {{ '   -   ' + contestant.key}}</span>
+						</li>
+					</ul>
+				</mat-card-subtitle>
+				<mat-card-content>
+					<mat-list dense *ngIf="results">
+						<mat-list-item *ngFor="let name of results[category][0]">
+							{{name.key}} - {{name.value}} Votes
+						</mat-list-item>
+					</mat-list>
+				</mat-card-content>
+			</mat-card>
+		</mat-grid-tile>
+		<!-- <mat-grid-tile colspan="3">
+			<mat-card class="card" *ngFor="let category of categories">
+				<mat-card-title>{{category}}</mat-card-title>
+				<mat-card-subtitle>Winner</mat-card-subtitle>
+				<mat-card-content>
+					<mat-list dense  *ngIf="winners">
+						<mat-list-item *ngFor="let contestant of winners[category]">
+							{{contestant.key}} - {{contestant.value}} Votes
+						</mat-list-item>
+					</mat-list>
+				</mat-card-content>
+			</mat-card>
+		</mat-grid-tile> -->
+	</mat-grid-list>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
