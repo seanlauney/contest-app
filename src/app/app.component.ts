@@ -102,6 +102,6 @@ export class AppComponent implements OnInit {
 	}
 	ngOnInit() {
 		this.votes = this.getVotes();
-		console.log(this.userService.getUsers());
+		// console.log(this.userService.getUsers());
 	}
 }
