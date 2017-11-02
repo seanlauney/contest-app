@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserService } from './services/users.service';
 import { MatListModule, MatCardModule, MatDatepickerModule,
 	 MatGridListModule, MatToolbarModule, MatButtonModule, MatMenuModule } from '@angular/material';
 @Component({
@@ -11,6 +12,10 @@ export class AppComponent implements OnInit {
 	votes: any;
 	results: any;
 	winners: any;
+	constructor(
+		private userService: UserService,
+	) { }
+
 	contestants = [
 		{firstName: 'Sean', lastName: 'Launey', photo: '#', costume: 'Papa Legba'},
 		{ firstName: 'Diane', lastName: 'Bostwick', photo: '#', costume: 'Voodoo Doll' },
@@ -97,5 +102,6 @@ export class AppComponent implements OnInit {
 	}
 	ngOnInit() {
 		this.votes = this.getVotes();
+		console.log(this.userService.getUsers());
 	}
 }

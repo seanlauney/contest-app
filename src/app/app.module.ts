@@ -2,8 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatListModule, MatCardModule, MatDatepickerModule, MatGridListModule,
-	 MatToolbarModule, MatButtonModule, MatMenuModule } from '@angular/material';
+import { UserService } from './services/users.service';
+import {
+	MatListModule,
+	MatCardModule,
+	MatDatepickerModule,
+	MatGridListModule,
+	MatToolbarModule,
+	MatButtonModule,
+	MatMenuModule
+	} from '@angular/material';
 @NgModule({
 	declarations: [
 		AppComponent
@@ -19,7 +27,7 @@ import { MatListModule, MatCardModule, MatDatepickerModule, MatGridListModule,
 		MatMenuModule,
 		BrowserAnimationsModule
 	],
-	providers: [],
+	providers: [UserService],
 	bootstrap: [AppComponent],
 	exports: [
 		MatListModule,
