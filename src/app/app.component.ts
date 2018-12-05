@@ -1,12 +1,9 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from './services/users.service';
-import { MatListModule, MatCardModule, MatDatepickerModule,
-	 MatGridListModule, MatToolbarModule, MatButtonModule, MatMenuModule } from '@angular/material';
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
 	votes: any;
@@ -17,7 +14,7 @@ export class AppComponent implements OnInit {
 	) { }
 
 	contestants = [
-		{firstName: 'Sean', lastName: 'Launey', photo: '#', costume: 'Papa Legba'},
+		{ firstName: 'Sean', lastName: 'Launey', photo: '#', costume: 'Papa Legba' },
 		{ firstName: 'Diane', lastName: 'Bostwick', photo: '#', costume: 'Voodoo Doll' },
 		{ firstName: 'Percy', lastName: 'Launey', photo: '#', costume: '3D Zombee' },
 		{ firstName: 'Sean', lastName: 'Launey', photo: '#', costume: 'Papa Legba' },
@@ -36,13 +33,13 @@ export class AppComponent implements OnInit {
 	];
 	categories = ['Best Overall', 'Scariest', 'Best Makeup'];
 	getVotes(): any {
-		const votes = {};
+		const votes: Object = {};
 		for (let i = 0; i < this.categories.length; i++) {
 			votes[this.categories[i]] = [];
 		}
 		return votes;
 	}
-	addVotes(contestant, category) {
+	addVotes(contestant: string, category: string) {
 		this.votes[category].push(contestant);
 		this.load();
 	}
@@ -55,7 +52,7 @@ export class AppComponent implements OnInit {
 		const keys = Object.keys(counts);
 		const summary = [];
 		for (let i = 0; i < keys.length; i++) {
-			summary.push({ key: keys[i], value: counts[keys[i]]});
+			summary.push({ key: keys[i], value: counts[keys[i]] });
 		}
 
 		return summary;
@@ -91,7 +88,7 @@ export class AppComponent implements OnInit {
 				});
 			}
 			winners[keys[i]] = comparrison.filter(function (el) {
-				return 	el.value === max;
+				return el.value === max;
 			});
 		}
 		return winners;

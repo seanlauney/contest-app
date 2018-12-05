@@ -1,37 +1,38 @@
 import { Injectable } from '@angular/core';
+import * as AWS from 'aws-sdk';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class UserService {
-	getUsers() {
-		const AWS = require('aws-sdk');
-
+	private dynamodb;
+	private docClient;
+	private params = {
+		TableName: 'contestants'
+	};
+	public init() {
+		// const AWS = require('aws-sdk');
 		AWS.config.update({
 			region: 'us-west-2',
-			endpoint: 'http://localhost:8000'
+			// endpoint: 'http://localhost:8000'
 		});
-
 		const docClient = new AWS.DynamoDB.DocumentClient();
+		const table = 'Movies';
+
+		const year = 2015;
+		const title = 'The Big New Movie';
 
 		const params = {
-			TableName: 'Movies',
-			KeyConditionExpression: '#yr = :yyyy',
-			ExpressionAttributeNames: {
-				'#yr': 'year'
-			},
-			ExpressionAttributeValues: {
-				':yyyy': 1985
+			TableName: table,
+			Item: {
+				'year': year,
+				'title': title,
+				'info': {
+					'plot': 'Nothing happens at all.',
+					'rating': 0
+				}
 			}
 		};
 
-		docClient.query(params, function (err, data) {
-			if (err) {
-				console.error('Unable to query. Error:', JSON.stringify(err, null, 2));
-			} else {
-				console.log('Query succeeded.');
-				data.Items.forEach(function (item) {
-					return item;
-				});
-			}
-		});
+
 	}
 }
